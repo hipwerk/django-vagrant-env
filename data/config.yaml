@@ -1,0 +1,71 @@
+local:
+    vm:
+        hostname: ''
+        network:
+            private_network: 192.168.56.123
+            forwarded_port:
+                hipVMFwdPort:
+                    host: '5142'
+                    guest: '22'
+        provider:
+            virtualbox:
+                modifyvm:
+                    natdnshostresolver1: on
+                    memory: '2024'
+                setextradata:
+                    VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root: 1
+        synced_folder:
+            hipVMSyncedFolder:
+                id: app-src
+                source: src
+                target: /opt/webapp
+                owner: 'vagrant'
+                group: 'www-data'
+                nfs: false
+        provision:
+            puppet:
+                manifests_path: data/puppet
+                manifest_file: site.pp
+                options:
+                    - '--verbose'
+                    - '--hiera_config /vagrant/data/puppet/hiera.yaml'
+    ssh:
+        host: null
+        port: null
+        private_key_path: null
+        username: vagrant
+        guest_port: null
+        keep_alive: true
+        forward_agent: false
+        forward_x11: false
+        shell: 'bash -l'
+    vagrant:
+        host: detect
+server:
+    packages:
+        - vim
+        - mc
+        - ruby
+postgresql:
+    root_password: admin321admin
+    user_group: postgres
+    databases:
+        WebAppDb:
+            grant: ALL
+            name: django_app
+            user: django_app
+            password: djangoapp321
+            sql_file: ''
+python:
+    virtualenv:
+        path: /opt/django_venv
+        requirements: /vagrant/data/files/requirements.txt
+
+webapp:
+    name: webapp
+    path: /opt/webapp
+    hostname: webapp.local
+    static_path: /opt/webapp/webapp/static
+    media_path: /opt/webapp/webapp/media
+    owner: vagrant
+    group: www-data

@@ -1,0 +1,16 @@
+[program:<%= @app_name %>]
+directory=<%= @app_path %>
+command = <%= @virtual_env_path %>/bin/gunicorn -c <%= @app_path %>/gunicorn.py wsgi:application
+
+user = <%= @owner %>
+group = <%= @group %>
+
+stdout_logfile = <%= @virtual_env_path %>/log/gunicorn_supervisor.log
+redirect_stderr = true
+
+stopsignal=KILL
+stopasgroup=true
+killasgroup=true
+
+autostart=true
+autorestart=true

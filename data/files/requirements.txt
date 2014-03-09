@@ -1,0 +1,8 @@
+Django==1.6.2
+django-celery
+django-compressor
+django-debug-toolbar
+Fabric
+South
+psycopg2
+gunicorn==18.0
