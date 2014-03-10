@@ -26,7 +26,7 @@ Installation
 $ vagrant up
 ```
 * go get a coffee and wait until the VM is up and provisioned
-* after the provision process is done you will have the DJango project created in you synced_folder
+* after the provision process is done you will have the DJango project created in you synced_folder based on [hipwerk/django-skel](https://github.com/hipwerk/django-skel) repository
 * edit the DB connection params from the Django settings
 ```
 $ vagrant ssh
