@@ -34,6 +34,7 @@ $ vagrant ssh
 $ cd /path/to/your/django/app
 $ python manage.py syncdb
 $ python manage.py migrate
+$ python manage.py collectstatic
 ```
 * now you just have to add a new line in your hosts file to map the configured virtual host and IP address
 * that's it!
