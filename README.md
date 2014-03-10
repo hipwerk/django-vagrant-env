@@ -1,6 +1,7 @@
-Django dev env
-==============
+A useful boilerplate that uses [Vagrant](http://www.vagrantup.com/) and [Puppet](http://puppetlabs.com/) to setup your development server and create your [Django](http://www.djangoproject.com/) 1.6 project. You'll have a development environment up and running in no time.
 
+Includes
+--------
 * Debian 7.4
 * Nginx
 * Python 2.7
