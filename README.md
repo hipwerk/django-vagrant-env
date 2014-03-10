@@ -14,7 +14,7 @@ Includes
  * South
  * psycopg2
  * Gunicorn
-* Postgrsql 9.3
+* Postgresql 9.3
 * Supervisor
 
 Installation
