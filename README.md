@@ -20,14 +20,14 @@ Includes
 Installation
 ------------
 
-* you can fork the repository and use it as your project repo, clone it or just dowload the zip and unpack in you existing project.
-* change the settings from **data/config.yaml** to customize your app. Create a folder for the **synced_folder** option. We user *src* as default, but you can custumize it as you wish. It doesn't even have to be in the current directory.
+* you can fork the repository and use it as your project repo, clone it or just download the zip and unpack it in your existing project.
+* change the settings from **data/config.yaml** to customize your app. Create a folder for the **synced_folder** option. We use *src* as default, but you can customize it as you wish. It doesn't even have to be in the current directory.
 * start your virtual machine:
 ```
 $ vagrant up
 ```
 * go get a coffee and wait until the VM is up and provisioned
-* after the provision process is done you will have the DJango project created in you synced_folder based on [hipwerk/django-skel](https://github.com/hipwerk/django-skel) repository
+* after the provision process is done you will have the Django project created in you synced_folder based on [hipwerk/django-skel](https://github.com/hipwerk/django-skel) repository
 * edit the DB connection params from the Django settings
 ```
 $ vagrant ssh
