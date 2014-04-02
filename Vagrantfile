@@ -9,7 +9,7 @@ data = configValues['local']
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "debian-74-x64-vbox43"
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/8398/vagrant-boxes/debian/7/amd64/debian-7.4.0-amd64_virtualbox.box"
+  config.vm.box_url = "https://googledrive.com/host/0B83ZToJ3fGtDVC1DeVVzc3lkc0U/debian-7.4.0-amd64_virtualbox.box"
 
   if data['vm']['hostname'].to_s != ''
     config.vm.hostname = "#{data['vm']['hostname']}"
