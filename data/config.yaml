@@ -1,6 +1,8 @@
 local:
     vm:
-        hostname: ''
+        box: puphpet/debian75-x64
+        box_url: puphpet/debian75-x64
+        hostname: 'webapp.local'
         network:
             private_network: 192.168.56.123
             forwarded_port:
@@ -46,6 +48,11 @@ server:
         - vim
         - mc
         - ruby
+        - libjpeg62-dev
+        - zlib1g-dev
+        - libwebp-dev
+        - libpng12-dev
+
 postgresql:
     root_password: admin321admin
     user_group: postgres

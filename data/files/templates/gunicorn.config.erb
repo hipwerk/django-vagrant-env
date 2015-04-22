@@ -10,6 +10,7 @@ def max_workers():
 
 
 bind = 'unix:/tmp/gunicorn_<%= @app_name %>.sock'
-max_requests = 1000
+max_requests = 1
 #worker_class = 'gevent'
 workers = max_workers()
+reload = True

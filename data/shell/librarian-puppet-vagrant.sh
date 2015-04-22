@@ -83,7 +83,7 @@ else
     echo 'Finished running update librarian-puppet'
 fi
 
-echo "Replacing puppetlabs-git module with custom"
-rm -rf /etc/puppet/modules/git
-git clone https://github.com/puphpet/puppetlabs-git.git /etc/puppet/modules/git
-echo "Finished replacing puppetlabs-git module with custom"
+#echo "Replacing puppetlabs-git module with custom"
+#rm -rf /etc/puppet/modules/git
+#git clone https://github.com/puphpet/puppetlabs-git.git /etc/puppet/modules/git
+#echo "Finished replacing puppetlabs-git module with custom"

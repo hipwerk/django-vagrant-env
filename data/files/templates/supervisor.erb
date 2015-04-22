@@ -1,4 +1,4 @@
-[program:<%= @app_name %>]
+[program:<%= @app_name %>-app]
 directory=<%= @app_path %>
 command = <%= @virtual_env_path %>/bin/gunicorn -c <%= @app_path %>/gunicorn.py wsgi:application
 
@@ -14,3 +14,36 @@ killasgroup=true
 
 autostart=true
 autorestart=true
+
+[program:<%= @app_name %>-celery]
+command=<%= @virtual_env_path %>/bin/celery worker -A <%= @app_name %> --loglevel=INFO
+
+directory=<%= @app_path %>
+
+user = <%= @owner %>
+group = <%= @group %>
+
+numprocs=1
+stdout_logfile=<%= @virtual_env_path %>/log/celery_supervisor.log
+stderr_logfile=<%= @virtual_env_path %>/log/celery_supervisor.log
+
+stopsignal=KILL
+stopasgroup=true
+
+autostart=true
+autorestart=true
+
+startsecs=10
+
+; Need to wait for currently executing tasks to finish at shutdown.
+; Increase this if you have very long running tasks.
+stopwaitsecs = 600
+
+; When resorting to send SIGKILL to the program to terminate it
+; send SIGKILL to its whole process group instead,
+; taking care of its children as well.
+killasgroup=true
+
+; if rabbitmq is supervised, set its priority higher
+; so it starts first
+priority=998

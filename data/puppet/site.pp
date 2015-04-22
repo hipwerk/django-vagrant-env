@@ -1,4 +1,5 @@
 include '::ntp'
+include '::rabbitmq'
 
 class djangoapp::homesetup (
   $username = 'vagrant'
@@ -62,6 +63,13 @@ class djangoapp::aptsetup {
   }
 }
 
+class djangoapp::rabbitmqSetup {
+   class { 'rabbitmq':
+     port => '5672'
+   }
+}
+
+
 class djangoapp::nginxsetup (
   $app_name = 'djangoapp',
   $app_path = undef,
@@ -101,8 +109,7 @@ class djangoapp::pgsetup (
       require           => Group[$user_group],
       ip_mask_deny_postgres_user => '0.0.0.0/32',
       ip_mask_allow_all_users    => '0.0.0.0/0',
-      listen_addresses           => '*',
-      version                    => '9.3'
+      listen_addresses           => '*'
     }
 
     if is_hash($databases) and count($databases) > 0 {
@@ -130,6 +137,12 @@ class djangoapp::pgsetup (
       grant    => $grant
     }
 
+    postgresql::server::role { $user:
+      createdb => true,
+      login => true,
+      password_hash => postgresql_password($user, $password),
+    }
+
     if $sql_file {
       $table = "${name}.*"
 
@@ -152,12 +165,12 @@ class djangoapp::virtualEnvSetup (
   $ssh_user = 'vagrant'
 ) {
 
-  file { 'venv-folder':
-      path        => "${$virtual_env_path}",
-      ensure      =>  directory,
-      owner       => $owner,
-      group       => $group,
-  }
+#  file { 'venv-folder':
+#      path        => "${$virtual_env_path}",
+#      ensure      =>  directory,
+#      owner       => $owner,
+#      group       => $group,
+#  }
 
   python::virtualenv { "${$virtual_env_path}":
     ensure       => present,
@@ -166,7 +179,7 @@ class djangoapp::virtualEnvSetup (
     group        => 'vagrant',
     cwd          => "${$virtual_env_path}",
     timeout      => 0,
-    require      => [Class['python'], File['venv-folder'], Class['postgresql::lib::devel']]
+    require      => [Class['python'], Class['postgresql::lib::devel']]
   }
 
   python::requirements { 'python-requirements':
@@ -262,6 +275,16 @@ $requirements_file = $python_values['virtualenv']['requirements']
 class { 'djangoapp::homesetup': username => $::ssh_username }
 class { 'djangoapp::aptsetup':}
 class { 'nginx': }
+
+class { 'elasticsearch':
+  manage_repo  => true,
+  repo_version => '1.3',
+  java_install => true
+}
+
+elasticsearch::instance { 'es-01': }
+
+
 class { 'djangoapp::pgsetup':
   root_password => $postgresql_values['root_password'],
   user_group => $postgresql_values['user_group'],
