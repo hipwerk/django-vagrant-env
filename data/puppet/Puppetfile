@@ -1,7 +1,7 @@
-forge "https://forge.puppetlabs.com"
+forge "https://forgeapi.puppetlabs.com"
 
 mod 'puppetlabs-git', "0.2.0"
-mod 'puppetlabs-ntp', "3.1.2"
+mod 'puppetlabs-ntp', "3.3.0"
 mod 'puppetlabs-stdlib', "4.3.2"
 mod 'puppetlabs-concat', "1.1.0"
 mod 'puppetlabs-apt', "1.5.2"
@@ -12,5 +12,4 @@ mod 'nginx', :git => 'git://github.com/jfryman/puppet-nginx.git', :ref => 'v0.0.
 mod 'puppetlabs-postgresql', "3.4.2"
 mod 'stankevich-python', "1.8.3"
 mod 'puppetlabs-rabbitmq', "4.0.0"
-mod 'doismellburning-beanstalkd', "1.0.0"
 mod 'elasticsearch-elasticsearch', "0.4.0"
